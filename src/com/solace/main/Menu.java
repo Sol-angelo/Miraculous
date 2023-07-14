@@ -11,7 +11,6 @@ import java.util.Random;
 import java.awt.event.MouseAdapter;
 
 import static com.solace.main.Game.*;
-import static com.solace.main.LoadSave.CreateSettingsFile;
 
 public class Menu extends MouseAdapter
 {
@@ -84,7 +83,7 @@ public class Menu extends MouseAdapter
                 else this.game.autoSave = true;
             }
             if (this.mouseOver(mx, my, 50, 50, 200, 64)) {
-                CreateSettingsFile();
+                LoadSave.writeToSettingsFile();
                 blackoutAlpha = 0.0f;
                 blackout = true;
                 blackoutState = Game.STATE.Menu;

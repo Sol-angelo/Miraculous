@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 
-import static com.solace.main.LoadSave.ReadFromSettingsFile;
 import static com.solace.main.Window.frame;
 
 public class Game extends Canvas implements Runnable
@@ -64,7 +63,7 @@ public class Game extends Canvas implements Runnable
         this.menu = new Menu(this, this.handler, this.hud, this.loadSave);
         this.addKeyListener(new KeyInput(this.handler, this));
         this.addMouseListener(this.menu);
-        ReadFromSettingsFile();
+        LoadSave.readFromSettingsFile();
         window = new Window("Chat Noir Simulator X", this);
         fullscreen();
         final BufferedImageLoader loader = new BufferedImageLoader();
