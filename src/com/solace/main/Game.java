@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 
+import static com.solace.main.Window.con;
 import static com.solace.main.Window.frame;
 
 public class Game extends Canvas implements Runnable
@@ -53,6 +54,7 @@ public class Game extends Canvas implements Runnable
     public static int screenHeight;
     public static boolean catCursor;
     public static boolean autoSave;
+    public static boolean music;
     public static Window window;
     
     public Game() {
@@ -90,7 +92,7 @@ public class Game extends Canvas implements Runnable
         Game.catnoirlogo = loader.loadImage("/texture/catnoirlogo.png");
         HUD.setLevel(1);
         HUD.setScore(0);
-        loopSound("theme");
+        playSound("theme");
         this.r = new Random();
         if (gameState == STATE.Menu || gameState == STATE.Help) {
             for (int i = 0; i < 20; ++i) {
@@ -255,12 +257,24 @@ public class Game extends Canvas implements Runnable
         }
     }
 
-    public void stopSound(String soundFile) throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        File f = new File(soundFile);
-        AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioIn);
-        clip.stop();
+    public void stopSound(String name) {
+        URL url = this.getClass().getResource("/sounds/"+name+".wav");
+        try {
+            if (url != null) {
+                AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioIn);
+                /*
+                FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                control.setValue(-10.0f);
+                clip.start();
+                */
+                clip.stop();
+
+            }
+        } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
+            throw new RuntimeException(e);
+        }
     }
     
     public static float clamp(float var, final float min, final float max) {

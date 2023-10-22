@@ -45,6 +45,7 @@ public class LoadSave {
             PrintWriter pw = new PrintWriter(txtFile);
             pw.println(Game.catCursor);
             pw.println(Game.autoSave);
+            pw.println(Game.music);
             pw.close();
             encrypt(key, txtFile, eFile);
         } catch (FileNotFoundException | CryptoException e) {
@@ -62,6 +63,7 @@ public class LoadSave {
 
                 Game.catCursor = Boolean.parseBoolean(br.readLine());
                 Game.autoSave = Boolean.parseBoolean(br.readLine());
+                Game.music = Boolean.parseBoolean(br.readLine());
 
                 br.close();
                 encrypt(key, txtFile, eFile);

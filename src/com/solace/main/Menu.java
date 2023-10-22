@@ -66,7 +66,7 @@ public class Menu extends MouseAdapter
             if (this.mouseOver(mx, my, Game.screenWidth/2-30, 550, 200, 64)) {
                 System.exit(2);
             }
-        } else if (this.game.gameState == Game.STATE.Settings) {
+        } else if (gameState == Game.STATE.Settings) {
             if (this.mouseOver(mx, my, 350, 174, 32, 16)) {
                 if (Game.catCursor) {
                     Game.catCursor = false;
@@ -79,8 +79,15 @@ public class Menu extends MouseAdapter
                 }
             }
             if (this.mouseOver(mx, my, 350, 274, 32, 16)) {
-                if (this.game.autoSave) this.game.autoSave = false;
-                else this.game.autoSave = true;
+                autoSave = !autoSave;
+            }
+            if (this.mouseOver(mx, my, 350, 374, 32, 16)) {
+                if (music) {
+                    game.stopSound("theme");
+                } else {
+                    game.loopSound("theme");
+                }
+                music = !music;
             }
             if (this.mouseOver(mx, my, 50, 50, 200, 64)) {
                 LoadSave.writeToSettingsFile();
@@ -170,23 +177,33 @@ public class Menu extends MouseAdapter
             g.setFont(fnt3);
             g.drawString("Cursor", 220, 190);
             g.drawString("Autosave", 220, 290);
+            g.drawString("Music", 220, 390);
             g.drawRect(350, 174, 32, 16);
             g.drawRect(210, 150, 200, 64);
             g.drawRect(350, 274, 32, 16);
             g.drawRect(210, 250, 200, 64);
+            g.drawRect(350, 374, 32, 16);
+            g.drawRect(210, 350, 200, 64);
             if (!game.catCursor) {
                 g.setColor(new Color(215, 65, 31));
                 g.fillRect(350, 175, 15, 14);
-            } else if (game.catCursor) {
+            } else {
                 g.setColor(new Color(45, 225, 50));
                 g.fillRect(366, 175, 15, 14);
             }
             if (!game.autoSave) {
                 g.setColor(new Color(215, 65, 31));
                 g.fillRect(350, 275, 15, 14);
-            } else if (game.autoSave) {
+            } else {
                 g.setColor(new Color(45, 225, 50));
                 g.fillRect(366, 275, 15, 14);
+            }
+            if (!game.music) {
+                g.setColor(new Color(215, 65, 31));
+                g.fillRect(350, 375, 15, 14);
+            } else {
+                g.setColor(new Color(45, 225, 50));
+                g.fillRect(366, 375, 15, 14);
             }
             g.setFont(fnt2);
             g.setColor(baseGrey);
