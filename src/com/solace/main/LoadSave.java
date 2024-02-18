@@ -112,13 +112,13 @@ public class LoadSave {
     public static File getFileByOS(String addpath, String name, String fileType) {
         String osname = System.getProperty("os.name");
         if (osname.contains("Mac")) {
-            Path path = Path.of(System.getProperty("user.home"), "Library", "Application Support", "Solangelo", "Launcher");
+            Path path = Path.of(System.getProperty("user.home"), "Library", "Application Support", "Solangelo", "Miraculous");
             File path2 = new File(path + "/" + addpath);
             path2.mkdirs();
             File txt = new File(path2 + "/"+name+"."+fileType);
             return txt;
         } else if (osname.contains("Window")) {
-            Path path = Path.of(System.getProperty("user.home"), "AppData", "Solangelo", "Launcher");
+            Path path = Path.of(System.getProperty("user.home"), "AppData", "Solangelo", "Miraculous");
             File path2 = new File(path + "/" + addpath);
             path2.mkdirs();
             File txt = new File(path2 + "/"+name+"."+fileType);
@@ -130,13 +130,13 @@ public class LoadSave {
     public static File getEncryptedByOS(String addpath, String name) {
         String osname = System.getProperty("os.name");
         if (osname.contains("Mac")) {
-            Path path = Path.of(System.getProperty("user.home"), "Library", "Application Support", "Solangelo", "Launcher");
+            Path path = Path.of(System.getProperty("user.home"), "Library", "Application Support", "Solangelo", "Miraculous");
             File path2 = new File(path + "/" + addpath);
             path2.mkdirs();
             File txt = new File(path2 + "/"+name+".sexinthecorridor");
             return txt;
         } else if (osname.contains("Window")) {
-            Path path = Path.of(System.getProperty("user.home"), "AppData", "Solangelo", "Launcher");
+            Path path = Path.of(System.getProperty("user.home"), "AppData", "Solangelo", "Miraculous");
             File path2 = new File(path + "/" + addpath);
             path2.mkdirs();
             File txt = new File(path2 + "/"+name+".sexinthecorridor");
@@ -148,13 +148,13 @@ public class LoadSave {
     public static File getFolderByOS(String addpath, String name) {
         String osname = System.getProperty("os.name");
         if (osname.contains("Mac")) {
-            Path path = Path.of(System.getProperty("user.home"), "Library", "Application Support", "Solangelo", "Launcher");
+            Path path = Path.of(System.getProperty("user.home"), "Library", "Application Support", "Solangelo", "Miraculous");
             File path2 = new File(path + "/" + addpath);
             path2.mkdirs();
             File txt = new File(path2 + "/"+name);
             return txt;
         } else if (osname.contains("Window")) {
-            Path path = Path.of(System.getProperty("user.home"), "AppData", "Solangelo", "Launcher");
+            Path path = Path.of(System.getProperty("user.home"), "AppData", "Solangelo", "Miraculous");
             File path2 = new File(path + "/" + addpath);
             path2.mkdirs();
             File txt = new File(path2 + "/"+name);

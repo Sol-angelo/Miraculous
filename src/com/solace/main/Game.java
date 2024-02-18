@@ -48,6 +48,7 @@ public class Game extends Canvas implements Runnable
     public static BufferedImage catnoirlogo;
     public static BufferedImage ladybuglogo;
     public static boolean paused;
+    public static boolean isCharacterLadybug;
     public static STATE gameState;
     public static int gameStateAsInt;
     public static int screenWidth;
@@ -92,7 +93,7 @@ public class Game extends Canvas implements Runnable
         Game.catnoirlogo = loader.loadImage("/texture/catnoirlogo.png");
         HUD.setLevel(1);
         HUD.setScore(0);
-        playSound("theme");
+        if (music) playSound("theme");
         this.r = new Random();
         if (gameState == STATE.Menu || gameState == STATE.Help) {
             for (int i = 0; i < 20; ++i) {
@@ -304,6 +305,7 @@ public class Game extends Canvas implements Runnable
         Saveload,
         StartSave,
         CharacterSelect,
-        Settings
+        Settings,
+        Playing
     }
 }

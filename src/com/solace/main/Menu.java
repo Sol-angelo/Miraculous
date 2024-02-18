@@ -96,6 +96,22 @@ public class Menu extends MouseAdapter
                 blackoutState = Game.STATE.Menu;
             }
         }
+        if (gameState == STATE.CharacterSelect) {
+            if (this.mouseOver(mx, my, 0, 0, screenWidth / 2, screenHeight / 4 * 3)) {
+                blackoutAlpha = 0.0f;
+                blackout = true;
+                blackoutState = STATE.Playing;
+                isCharacterLadybug = true;
+                System.out.println("ladybug");
+            }
+            if (this.mouseOver(mx, my, screenWidth / 2, 0, screenWidth / 2, screenHeight / 4 * 3)) {
+                blackoutAlpha = 0.0f;
+                blackout = true;
+                blackoutState = STATE.Playing;
+                isCharacterLadybug = false;
+                System.out.println("chat noir");
+            }
+        }
     }
     
     @Override
@@ -210,8 +226,12 @@ public class Menu extends MouseAdapter
             g.drawString("Back", 130, 90);
             g.drawRect(50, 50, 200, 64);
         } else if (Game.gameState == Game.STATE.CharacterSelect) {
+            g.setColor(new Color(173, 229, 174));
+            g.fillRect(screenWidth/2, 0, screenWidth/2, screenHeight);
+            g.setColor(new Color(217, 143, 143));
+            g.fillRect(0, 0, screenWidth/2, screenHeight);
             g.drawImage(catnoir2, (int) (screenWidth/2-(200*(size[1]-1))), (int) (screenHeight/6-(200*(size[1]-1))), (int) (((catnoir2.getWidth())*0.75)*size[1]), (int) (((catnoir2.getHeight())*0.75)*size[1]), null);
-            g.drawImage(ladybug, (int) (-20-(100*(size[0]-1))), (int) (screenHeight/6-(100*(size[0]-1))), (int) (((ladybug.getWidth())*2)*size[0]), (int) (((ladybug.getHeight())*2)*size[0]), null);
+            g.drawImage(ladybug, (int) -(200*(size[0]-1)), (int) (screenHeight/6-(200*(size[0]-1))), (int) (((ladybug.getWidth())*0.75)*size[0]), (int) (((ladybug.getHeight())*0.75)*size[0]), null);
             g.setColor(new Color(100, 227, 103));
             g.fillRect(screenWidth/2+1, screenHeight/4*3-30, screenWidth/2, screenHeight);
             g.setColor(new Color(218, 57, 57));
@@ -219,12 +239,12 @@ public class Menu extends MouseAdapter
             g.drawImage(ladybuglogo, screenWidth/4-64, screenHeight/4*3, 128, 128, null);
             g.drawImage(catnoirlogo, screenWidth/4*3-64, screenHeight/4*3, 128, 128,null);
             g.setColor(new Color(38, 38, 38));
-            g.drawLine(0, screenHeight/4*3-31, screenWidth, screenHeight/4*3-31);
-            g.drawLine(0, screenHeight/4*3-30, screenWidth, screenHeight/4*3-30);
-            g.drawLine(0, screenHeight/4*3-29, screenWidth, screenHeight/4*3-29);
-            g.drawLine(screenWidth/2, 0, screenWidth/2, screenHeight);
-            g.drawLine(screenWidth/2-1, 0, screenWidth/2-1, screenHeight);
-            g.drawLine(screenWidth/2+1, 0, screenWidth/2+1, screenHeight);
+            //g.drawLine(0, screenHeight/4*3-31, screenWidth, screenHeight/4*3-31);
+            //g.drawLine(0, screenHeight/4*3-30, screenWidth, screenHeight/4*3-30);
+            //g.drawLine(0, screenHeight/4*3-29, screenWidth, screenHeight/4*3-29);
+            //g.drawLine(screenWidth/2, 0, screenWidth/2, screenHeight);
+            //g.drawLine(screenWidth/2-1, 0, screenWidth/2-1, screenHeight);
+            //g.drawLine(screenWidth/2+1, 0, screenWidth/2+1, screenHeight);
         }
         if (blackout) {
             g.setColor(blackoutColor);
