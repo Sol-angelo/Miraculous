@@ -29,6 +29,7 @@ public class Game extends Canvas implements Runnable
     public int currentFramesInt;
     public static BufferedImage background;
     public static BufferedImage marinette_room;
+    public static BufferedImage adrien_room;
     public static BufferedImage catnoir;
     public static BufferedImage catnoir2;
     public static BufferedImage adrien;
@@ -77,6 +78,7 @@ public class Game extends Canvas implements Runnable
         final BufferedImageLoader loader = new BufferedImageLoader();
         Game.background = loader.loadImage("/texture/background.jpeg");
         Game.marinette_room = loader.loadImage("/texture/marinette_room.png");
+        Game.adrien_room = loader.loadImage("/texture/adrien_room.png");
         Game.catnoir = loader.loadImage("/texture/catnoir.png");
         Game.catnoir2 = loader.loadImage("/texture/catnoir2.png");
         Game.adrien = loader.loadImage("/texture/adrien.png");
@@ -203,6 +205,7 @@ public class Game extends Canvas implements Runnable
         g.setColor(new Color(173, 173, 173));
         if (gameState != STATE.CharacterSelect && gameState != STATE.Playing) g.drawImage(background, screenWidth/2-960, 0, null);
         else if (gameState == STATE.Playing && currentScene == SCENE.MarinetteRoom) g.drawImage(marinette_room, screenWidth/2-640, screenHeight/2-420, null);
+        else if (gameState == STATE.Playing && currentScene == SCENE.AdrienRoom) g.drawImage(adrien_room, (int) (screenWidth/2-((1470)/2)), (int) (screenHeight/2-((800)/2)), (int) (1470), (int) (800), null);
         else g.fillRect(0, 0, screenWidth+100, screenHeight+100);
         this.handler.render(g);
         if (gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.Saveload || gameState == STATE.Settings || gameState == STATE.CharacterSelect) {
@@ -326,6 +329,7 @@ public class Game extends Canvas implements Runnable
     public enum SCENE
     {
         Null,
-        MarinetteRoom
+        MarinetteRoom,
+        AdrienRoom
     }
 }

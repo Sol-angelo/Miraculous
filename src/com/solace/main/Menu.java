@@ -110,6 +110,7 @@ public class Menu extends MouseAdapter
                 blackout = true;
                 blackoutState = STATE.Playing;
                 isCharacterLadybug = false;
+                currentScene = SCENE.AdrienRoom;
                 System.out.println("chat noir");
             }
         }
