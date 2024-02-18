@@ -61,7 +61,7 @@ public class Pause extends MouseAdapter
     }
     
     public void render(final Graphics g) {
-        final Font fnt2 = new Font("arial", 1, 30);
+        final Font fnt2 = new Font("verdana", 0, 30);
         g.setFont(fnt2);
         g.setColor(Color.white);
         g.drawString("Play", 275, 190);

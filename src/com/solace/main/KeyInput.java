@@ -87,13 +87,14 @@ public class KeyInput extends KeyAdapter
             }
         }*/
         if (key == KeyEvent.VK_ESCAPE) {
-            if (this.game.gameState == Game.STATE.Menu) {
+            if (Game.gameState == Game.STATE.Menu) {
                 System.exit(2);
-            } else if (Game.paused) {
-                Game.paused = false;
-            } else if (this.game.gameState == Game.STATE.Settings || this.game.gameState == Game.STATE.Help) {
-                this.game.gameState = Game.STATE.Menu;
-            }
+            } else if (Game.gameState == Game.STATE.Settings || Game.gameState == Game.STATE.Help) {
+                Game.gameState = Game.STATE.Menu;
+            } else Game.paused = !Game.paused;
+        }
+        if (key == KeyEvent.VK_F3) {
+            Game.isF3 = !Game.isF3;
         }
     }
     

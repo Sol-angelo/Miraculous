@@ -102,6 +102,7 @@ public class Menu extends MouseAdapter
                 blackout = true;
                 blackoutState = STATE.Playing;
                 isCharacterLadybug = true;
+                currentScene = SCENE.MarinetteRoom;
                 System.out.println("ladybug");
             }
             if (this.mouseOver(mx, my, screenWidth / 2, 0, screenWidth / 2, screenHeight / 4 * 3)) {
@@ -170,9 +171,9 @@ public class Menu extends MouseAdapter
     }
     
     public void render(final Graphics g) {
-        final Font fnt = new Font("arial", 1, 60);
-        final Font fnt2 = new Font("arial", 1, 30);
-        final Font fnt3 = new Font("arial", 1, 20);
+        final Font fnt = new Font("verdana", 0, 60);
+        final Font fnt2 = new Font("verdana", 0, 30);
+        final Font fnt3 = new Font("verdana", 0, 20);
         Color baseGrey = new Color(38, 38, 38);
         if (this.game.gameState == Game.STATE.Menu) {
             g.setFont(fnt);

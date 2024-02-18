@@ -26,7 +26,9 @@ public class Game extends Canvas implements Runnable
     private HUD hud;
     private Menu menu;
     private LoadSave loadSave;
+    public int currentFramesInt;
     public static BufferedImage background;
+    public static BufferedImage marinette_room;
     public static BufferedImage catnoir;
     public static BufferedImage catnoir2;
     public static BufferedImage adrien;
@@ -50,6 +52,8 @@ public class Game extends Canvas implements Runnable
     public static boolean paused;
     public static boolean isCharacterLadybug;
     public static STATE gameState;
+    public static SCENE currentScene;
+    public static boolean isF3;
     public static int gameStateAsInt;
     public static int screenWidth;
     public static int screenHeight;
@@ -61,6 +65,7 @@ public class Game extends Canvas implements Runnable
     public Game() {
         this.running = false;
         gameState = STATE.Menu;
+        currentScene = SCENE.Null;
         this.handler = new Handler(this);
         this.hud = new HUD(this, this.handler);
         this.menu = new Menu(this, this.handler, this.hud, this.loadSave);
@@ -71,6 +76,7 @@ public class Game extends Canvas implements Runnable
         fullscreen();
         final BufferedImageLoader loader = new BufferedImageLoader();
         Game.background = loader.loadImage("/texture/background.jpeg");
+        Game.marinette_room = loader.loadImage("/texture/marinette_room.png");
         Game.catnoir = loader.loadImage("/texture/catnoir.png");
         Game.catnoir2 = loader.loadImage("/texture/catnoir2.png");
         Game.adrien = loader.loadImage("/texture/adrien.png");
@@ -144,7 +150,8 @@ public class Game extends Canvas implements Runnable
             ++frames;
             if (System.currentTimeMillis() - timer > 1000L) {
                 timer += 1000L;
-                System.out.println(frames);
+                System.out.println((int)frames + " FPS");
+                currentFramesInt = (int) frames;
                 frames = 0.0f;
             }
         }
@@ -194,21 +201,28 @@ public class Game extends Canvas implements Runnable
         }
         final Graphics g = bs.getDrawGraphics();
         g.setColor(new Color(173, 173, 173));
-        if (gameState != STATE.CharacterSelect) g.drawImage(background, screenWidth/2-960, 0, null);
+        if (gameState != STATE.CharacterSelect && gameState != STATE.Playing) g.drawImage(background, screenWidth/2-960, 0, null);
+        else if (gameState == STATE.Playing && currentScene == SCENE.MarinetteRoom) g.drawImage(marinette_room, screenWidth/2-640, screenHeight/2-420, null);
         else g.fillRect(0, 0, screenWidth+100, screenHeight+100);
         this.handler.render(g);
-        /*if (this.gameState == STATE.BEasy || this.gameState == STATE.BMedium || this.gameState == STATE.BHard || this.gameState == STATE.SEasy || this.gameState == STATE.SMedium || this.gameState == STATE.SHard) {
-            this.hud.render(g);
-        }*/
         if (gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.Saveload || gameState == STATE.Settings || gameState == STATE.CharacterSelect) {
             this.menu.render(g);
         }
         if (paused) {
-                final Font fnt = new Font("arial", 1, 50);
-                g.setFont(fnt);
-                g.setColor(new Color(255, 64, 39));
-                g.drawString("PAUSED", 210, 120);
+            final Font fnt = new Font("verdana", 0, 40);
+            g.setFont(fnt);
+            g.setColor(new Color(70, 70, 70, 102));
+            g.fillRect(0, 0, screenWidth, screenHeight);
+            g.setColor(new Color(255, 255, 255));
+            g.drawString("Pause", screenWidth/2-60, screenHeight/2-300);
+            //g.drawLine(screenWidth/2, 0, screenWidth/2, screenHeight);
             this.menu.render(g);
+        }
+        if (isF3) {
+            final Font fnt = new Font("verdana", 0, 15);
+            g.setFont(fnt);
+            g.setColor(new Color(33, 33, 33));
+            g.drawString("FPS: "+currentFramesInt, 10, 20);
         }
         g.dispose();
         bs.show();
@@ -307,5 +321,11 @@ public class Game extends Canvas implements Runnable
         CharacterSelect,
         Settings,
         Playing
+    }
+
+    public enum SCENE
+    {
+        Null,
+        MarinetteRoom
     }
 }
